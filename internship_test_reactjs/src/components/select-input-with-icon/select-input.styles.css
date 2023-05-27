@@ -1,0 +1,46 @@
+.select-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  /* align-items: center; */
+}
+
+.select-products-container {
+  width: 44.5vw;
+}
+
+.select-products-input {
+  padding-left: 2.6rem !important;
+}
+
+.select-input {
+  font-family: "Inter";
+  height: 1.8rem;
+  border-radius: 0.2rem;
+  font-weight: bold;
+  min-width: 5rem;
+  background-color: white;
+  border: thin solid #80808081;
+  border-radius: 4px;
+  display: inline-block;
+  font-size: 0.9rem;
+  line-height: 1.5em;
+  padding: 0.2em 3.5em 0.2em 1em;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  color: #333;
+}
+
+.select-updown-arrow {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  /* background: url("./assets/images/up-and-down-arrow.png") no-repeat;
+  background-position: right center; */
+  /* padding-right: 20px; */
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAA3klEQVRIS+3VMU9CMRTF8d8zBL+aizoQFhx0kUk33RzdYMNFXUFnYeGrYYyaJiUxJHDLSxodbNKpfeffc9/pbaPyaCrr+3OA++z4rtT5Pg5GuMnCY9yWQEoBE1xhlUUP8YDrCBIB0vojLvGO0yz4hm4JJAKcYYoPHGOZAUdYoIMBXrc5iQAHeMlzviFygj7O8dkWEJU4XI8chALRhn9AVKHf70VRTHu4wFfbmKZLNKt50dLBnna0imcMd/2I0phWa3Y/D1e1Xa9BCZJG0VuQNpaWKMx72xS1Fl5/WN3BN+AgJhnZQlq4AAAAAElFTkSuQmCC");
+  background-position: calc(100% - 0.5rem), 100% 0;
+  background-size: 1.5em 1.5em;
+  background-repeat: no-repeat;
+}

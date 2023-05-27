@@ -1,0 +1,13 @@
+.card-shadow {
+  box-shadow: rgba(50, 50, 93, 0.212) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.158) 0px 1px 3px -1px !important;
+}
+
+.reviews-cards-container::-webkit-scrollbar {
+  width: 0.5rem;
+  background-color: transparent;
+}
+
+.reviews-cards-container::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
