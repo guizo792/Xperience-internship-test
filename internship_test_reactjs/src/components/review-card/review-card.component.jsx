@@ -9,8 +9,11 @@ import {
 } from "../../utils/countryUtils";
 
 import "./review-card.styles.css";
+import { useState } from "react";
 
 const ReviewsCards = () => {
+  const [reviewsData, setReviewsData] = useState([]);
+
   const reviews = [
     {
       id: 1,
@@ -77,7 +80,7 @@ const ReviewsCards = () => {
   ];
 
   return (
-    <div className="reviews-cards-container overflow-y-scroll h-[69vh] mt-4 flex flex-col gap-2 p-2">
+    <div className="no-scrollbar-container overflow-y-scroll h-[69vh] mt-4 flex flex-col gap-2 p-2">
       {reviews.map((review, i) => {
         // Representing gold stars as 1's and silver as 0's
         const goldStars = Array(5).fill(0);
@@ -136,7 +139,7 @@ const ReviewsCards = () => {
                   {goldStars.map((item, i) => {
                     if (item === 1)
                       return (
-                        <AiFillStar color={"#FFA500"} size={"20px"} key={i} />
+                        <AiFillStar color={"#FF8C00"} size={"20px"} key={i} />
                       );
                     return (
                       <AiFillStar color={"#cbd5e1"} size={"20px"} key={i} />

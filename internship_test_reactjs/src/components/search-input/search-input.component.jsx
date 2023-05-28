@@ -1,4 +1,16 @@
+import { useContext, useState } from "react";
+import { ReviewsContext } from "../../context/reviewsContext";
+
 const SearchInput = () => {
+  const [input, setInput] = useState("");
+
+  const { reviews, updateReviews } = useContext(ReviewsContext);
+
+  const onChangeHandler = (event) => {
+    setInput(event.target.value);
+    console.log(input);
+  };
+
   return (
     <form>
       <div className="relative">
@@ -20,9 +32,11 @@ const SearchInput = () => {
           </svg>
         </div>
         <input
+          value={input}
+          onChange={onChangeHandler}
           type="search"
           id="default-search"
-          className=" p-[5px] pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 outline-none"
+          className="bg-white font-medium p-[5px] pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 outline-none"
           placeholder="search"
           required
         />

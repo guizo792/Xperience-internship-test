@@ -6,7 +6,7 @@ import SelectInputWithCustomIcon from "../select-input-with-icon/select-input-ch
 
 const BodyLeftSide = () => {
   return (
-    <div className="main-left-side-container p-4 flex flex-col gap-4 max-w-[16.4rem] ">
+    <div className="no-scrollbar-container main-left-side-container p-4 flex flex-col gap-4 max-w-[16.4rem] overflow-y-scroll">
       <SearchInput />
       <SelectInputWithCustomIcon
         options={[{ value: "all time", label: "all time" }]}

@@ -41,7 +41,7 @@ const FilterByRating = () => {
                 <div className="stars flex">
                   {goldStars.map((item) => {
                     if (item === 1)
-                      return <AiFillStar color={"#FFA500"} size={"20px"} />;
+                      return <AiFillStar color={"#FF8C00"} size={"20px"} />;
                     return <AiFillStar color={"#cbd5e1"} size={"20px"} />;
                   })}
                 </div>
