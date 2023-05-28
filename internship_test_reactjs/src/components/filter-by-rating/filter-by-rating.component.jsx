@@ -2,25 +2,33 @@ import { AiOutlineCaretDown, AiFillStar } from "react-icons/ai";
 // import data from "../../data/reviewsData.json";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setRatingFilter } from "../../store/reviews/reviews.action";
+import {
+  setRatingFilter,
+  setVersionFilter,
+} from "../../store/reviews/reviews.action";
+import data from "../../data/reviewsData.json";
 
 const FilterByRating = () => {
   const { reviews } = useSelector((state) => state.reviewsData);
   const [open, setOpen] = useState(false);
-  const [ratingFilterValue, setRatingFilterValue] = useState("");
+  const [currentReviews, setCurrentReviews] = useState(data);
+  const [ratingFilterValue, setRatingFilterValue] = useState(null);
   const dispatch = useDispatch();
+  const { ratingFilter } = useSelector((state) => state.reviewsData);
 
   useEffect(() => {
     dispatch(setRatingFilter(null));
+    setCurrentReviews(data);
   }, []);
 
   const ratings = [5, 4, 3, 2, 1];
-  const currentReviews = reviews;
+  // const currentReviews = reviews;
   const totalReviewsCount = currentReviews.length;
 
   useEffect(() => {
-    dispatch(setRatingFilter(ratingFilterValue));
-  }, [ratingFilterValue]);
+    console.log(ratingFilter, reviews);
+    setCurrentReviews(reviews);
+  }, [ratingFilter, reviews]);
 
   return (
     <div className="flex flex-col gap-2 mb-[3px]">
@@ -56,6 +64,8 @@ const FilterByRating = () => {
                 key={rating}
                 onClick={(e) => {
                   e.preventDefault();
+                  dispatch(setRatingFilter(rating));
+                  dispatch(setVersionFilter(""));
                   setRatingFilterValue(rating);
                 }}
               >

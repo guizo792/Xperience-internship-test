@@ -34,7 +34,7 @@ const ReviewsCards = () => {
     versionFilter,
   } = reviewsData;
 
-  console.log(versionFilter);
+  console.log("🟥", ratingFilter, versionFilter);
 
   useEffect(() => {
     // Handle searching and filtering

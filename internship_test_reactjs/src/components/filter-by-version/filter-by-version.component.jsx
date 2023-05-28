@@ -3,7 +3,10 @@ import { AiOutlineCaretDown, AiFillStar } from "react-icons/ai";
 import countItemsByVersion from "../../utils/countItemsByVersion";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setVersionFilter } from "../../store/reviews/reviews.action";
+import {
+  setRatingFilter,
+  setVersionFilter,
+} from "../../store/reviews/reviews.action";
 import data from "../../data/reviewsData.json";
 
 const FilterByVersion = () => {
@@ -59,6 +62,8 @@ const FilterByVersion = () => {
                 key={key}
                 onClick={(e) => {
                   e.preventDefault();
+                  dispatch(setRatingFilter(null));
+                  dispatch(setVersionFilter(""));
                   setVersionFilterValue(key);
                   console.log(key);
                 }}
