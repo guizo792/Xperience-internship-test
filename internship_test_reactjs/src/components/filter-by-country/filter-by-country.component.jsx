@@ -6,6 +6,7 @@ import {
   getCountryCodeFromName,
   getCountryNameFromCode,
 } from "../../utils/countryUtils";
+import CountryFlag from "../country-flag/country-flag.component";
 
 const FilterByCountry = () => {
   const [open, setOpen] = useState(false);
@@ -52,11 +53,7 @@ const FilterByCountry = () => {
                 key={key}
               >
                 <div className="flex gap-2 items-center">
-                  <img
-                    // src="https://cdn.countryflags.com/thumbs/united-states-of-america/flag-400.png"
-                    src={`https://flagsapi.com/${countryCode}/flat/24.png`}
-                    alt={`${key} Flag`}
-                  />
+                  <CountryFlag countryCode={countryCode.toLowerCase()} />
                   <div className="font-bold text-sm">{countryName}</div>
                 </div>
                 <div className="rating-count text-gray-500">

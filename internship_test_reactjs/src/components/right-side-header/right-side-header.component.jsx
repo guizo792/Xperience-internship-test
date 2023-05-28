@@ -3,11 +3,19 @@ import { IoMdArrowDropdown } from "react-icons/io";
 import { BiCodeCurly } from "react-icons/bi";
 import WifiSignal from "../../assets/images/wifi-signal.png";
 import Button from "../button/button.component";
+import { useSelector } from "react-redux";
 
 const RightSideHeader = () => {
+  const { reviewsData } = useSelector((state) => state);
+
+  const { reviews, indexOfFirstReview, indexOfLastReview } = reviewsData;
+
   return (
     <div className="flex items-center justify-between gap-12">
-      <span className="text-sm font-bold">Viewing 1-10 of 157 Reviews</span>
+      <span className="text-sm font-bold">
+        Viewing {indexOfFirstReview}-{indexOfLastReview} of {reviews.length}{" "}
+        Reviews
+      </span>
       <span className="flex gap-2">
         <Button>
           <span>

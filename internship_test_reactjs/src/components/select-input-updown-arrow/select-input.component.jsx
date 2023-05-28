@@ -1,14 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import "../select-input-with-icon/select-input.styles.css";
+import { useDispatch } from "react-redux";
+import { setSorting } from "../../store/reviews/reviews.action";
 
 const SelectInputUpDownArrow = (props) => {
-  // eslint-disable-next-line no-undef
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState("Newest first");
+  const dispatch = useDispatch();
 
   const handleChange = (event) => {
     setValue(event.target.value);
   };
+
+  useEffect(() => {
+    dispatch(setSorting(value));
+  }, [value]);
 
   return (
     <div className="select-container sorting-container">

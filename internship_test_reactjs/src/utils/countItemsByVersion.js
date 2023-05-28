@@ -1,6 +1,4 @@
-import data from "../data/reviewsData.json";
-
-const countItemsByVersion = () => {
+const countItemsByVersion = (data) => {
   const versionCount = {};
 
   data.forEach((item) => {

@@ -1,12 +1,26 @@
 import { AiOutlineCaretDown, AiFillStar } from "react-icons/ai";
-import data from "../../data/reviewsData.json";
-import { useState } from "react";
+// import data from "../../data/reviewsData.json";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setRatingFilter } from "../../store/reviews/reviews.action";
 
 const FilterByRating = () => {
+  const { reviews } = useSelector((state) => state.reviewsData);
   const [open, setOpen] = useState(false);
+  const [ratingFilterValue, setRatingFilterValue] = useState("");
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setRatingFilter(null));
+  }, []);
 
   const ratings = [5, 4, 3, 2, 1];
-  const totalReviewsCount = data.length;
+  const currentReviews = reviews;
+  const totalReviewsCount = currentReviews.length;
+
+  useEffect(() => {
+    dispatch(setRatingFilter(ratingFilterValue));
+  }, [ratingFilterValue]);
 
   return (
     <div className="flex flex-col gap-2 mb-[3px]">
@@ -24,9 +38,9 @@ const FilterByRating = () => {
       </div>
       {open && (
         <div className="flex flex-col gap-2">
-          {ratings.map((rating) => {
+          {ratings.map((rating, index) => {
             // Getting the number of reviews based on this rating
-            const reviews = data.filter((review) => {
+            const reviews = currentReviews.filter((review) => {
               return parseInt(review.rating) === rating;
             });
 
@@ -37,7 +51,14 @@ const FilterByRating = () => {
             const goldStars = Array(5).fill(0);
             goldStars.fill(1, 0, rating);
             return (
-              <div className="flex gap-4 items-center" key={rating}>
+              <div
+                className="flex gap-4 items-center cursor-pointer"
+                key={rating}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setRatingFilterValue(rating);
+                }}
+              >
                 <div className="stars flex">
                   {goldStars.map((item) => {
                     if (item === 1)

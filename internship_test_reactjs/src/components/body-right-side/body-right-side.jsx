@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import Pagination from "../pagination/pagination.component";
 import ReviewsCards from "../review-card/review-card.component";
 import RightSideHeader from "../right-side-header/right-side-header.component";

@@ -1,16 +1,5 @@
 import { countries } from "countries-list";
 import data from "../data/reviewsData.json";
-import countriesData from "../data/countries.json";
-
-export function getCountrySlug(countryName) {
-  const country = countriesData.find((country) => country.name === countryName);
-
-  if (country) {
-    return country.slug;
-  } else {
-    return null;
-  }
-}
 
 export const countItemsByCountry = () => {
   const countryCount = {};

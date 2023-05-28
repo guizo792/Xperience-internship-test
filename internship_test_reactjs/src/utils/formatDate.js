@@ -2,7 +2,6 @@ export default function formatDate(date) {
   const transformedDate = new Date(date);
   const now = new Date();
   const diff = Math.abs(now - transformedDate);
-  console.log(now);
   const minutes = Math.floor(diff / 60000);
   const hours = Math.floor(minutes / 60);
   const days = Math.floor(hours / 24);
