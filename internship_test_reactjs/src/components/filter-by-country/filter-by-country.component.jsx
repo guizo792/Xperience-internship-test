@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AiOutlineCaretDown } from "react-icons/ai";
+
+import data from "../../data/reviewsData.json";
 
 import {
   countItemsByCountry,
@@ -7,13 +9,31 @@ import {
   getCountryNameFromCode,
 } from "../../utils/countryUtils";
 import CountryFlag from "../country-flag/country-flag.component";
+import { useDispatch, useSelector } from "react-redux";
+import { setCountryFilter } from "../../store/reviews/reviews.action";
 
 const FilterByCountry = () => {
+  const { reviews } = useSelector((state) => state.reviewsData);
   const [open, setOpen] = useState(false);
 
-  // console.log(getCountryInfo(countries, "US"));
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setCountryFilter(""));
+  }, []);
+
+  // Get the different versions
+  let globalItemsCount = countItemsByCountry(data);
+  // set their count to default "0"
+  globalItemsCount = Object.fromEntries(
+    Object.keys(globalItemsCount).map((key) => [key, 0])
+  );
+
   // Get the count of items for each country
-  const itemCounts = countItemsByCountry();
+  let itemCounts = countItemsByCountry(reviews);
+
+  // Mergin the two arrays to have different version and their count, 0 if it doesn't exist in the current reviews
+  itemCounts = { ...globalItemsCount, ...itemCounts };
 
   return (
     <div className="flex flex-col gap-2">
@@ -49,8 +69,13 @@ const FilterByCountry = () => {
 
             return (
               <div
-                className="flex gap-2 items-center justify-between"
+                className="flex gap-2 items-center justify-between cursor-pointer"
                 key={key}
+                onClick={(e) => {
+                  e.preventDefault();
+                  dispatch(setCountryFilter(key));
+                  console.log(key);
+                }}
               >
                 <div className="flex gap-2 items-center">
                   <CountryFlag countryCode={countryCode.toLowerCase()} />

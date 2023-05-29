@@ -21,10 +21,10 @@ const FilterByVersion = () => {
   }, []);
 
   // Update the filter value whenever it changed here
-  useEffect(() => {
-    console.log(versionFilterValue);
-    dispatch(setVersionFilter(versionFilterValue));
-  }, [versionFilterValue]);
+  // useEffect(() => {
+  //   console.log(versionFilterValue);
+  //   dispatch(setVersionFilter(versionFilterValue));
+  // }, [versionFilterValue]);
 
   // Get the different versions
   let globalItemsCount = countItemsByVersion(data);
@@ -62,9 +62,9 @@ const FilterByVersion = () => {
                 key={key}
                 onClick={(e) => {
                   e.preventDefault();
-                  dispatch(setRatingFilter(null));
-                  dispatch(setVersionFilter(""));
-                  setVersionFilterValue(key);
+                  // dispatch(setRatingFilter(null));
+                  dispatch(setVersionFilter(key));
+                  // setVersionFilterValue(key);
                   console.log(key);
                 }}
               >

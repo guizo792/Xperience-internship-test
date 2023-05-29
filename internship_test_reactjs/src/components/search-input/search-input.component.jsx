@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  setCountryFilter,
   setFirstReviewIndex,
   setLastReviewIndex,
   setRatingFilter,
@@ -8,8 +9,6 @@ import {
   setSearchKeyword,
   setVersionFilter,
 } from "../../store/reviews/reviews.action";
-
-import data from "../../data/reviewsData.json";
 
 const SearchInput = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -25,6 +24,7 @@ const SearchInput = () => {
       dispatch(setSearchKeyword(""));
       dispatch(setRatingFilter(null));
       dispatch(setVersionFilter(""));
+      dispatch(setCountryFilter(""));
     }
   };
 

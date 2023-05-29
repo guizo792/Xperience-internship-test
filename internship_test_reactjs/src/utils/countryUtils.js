@@ -1,7 +1,7 @@
 import { countries } from "countries-list";
-import data from "../data/reviewsData.json";
+// import data from "../data/reviewsData.json";
 
-export const countItemsByCountry = () => {
+export const countItemsByCountry = (data) => {
   const countryCount = {};
 
   data.forEach((item) => {

@@ -11,8 +11,7 @@ import data from "../../data/reviewsData.json";
 const FilterByRating = () => {
   const { reviews } = useSelector((state) => state.reviewsData);
   const [open, setOpen] = useState(false);
-  const [currentReviews, setCurrentReviews] = useState(data);
-  const [ratingFilterValue, setRatingFilterValue] = useState(null);
+  const [currentReviews, setCurrentReviews] = useState([]);
   const dispatch = useDispatch();
   const { ratingFilter } = useSelector((state) => state.reviewsData);
 
@@ -28,7 +27,7 @@ const FilterByRating = () => {
   useEffect(() => {
     console.log(ratingFilter, reviews);
     setCurrentReviews(reviews);
-  }, [ratingFilter, reviews]);
+  }, [reviews]);
 
   return (
     <div className="flex flex-col gap-2 mb-[3px]">
@@ -65,8 +64,8 @@ const FilterByRating = () => {
                 onClick={(e) => {
                   e.preventDefault();
                   dispatch(setRatingFilter(rating));
-                  dispatch(setVersionFilter(""));
-                  setRatingFilterValue(rating);
+                  // dispatch(setVersionFilter(""));
+                  // setRatingFilterValue(rating);
                 }}
               >
                 <div className="stars flex">

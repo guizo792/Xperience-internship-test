@@ -11,20 +11,14 @@ import "./review-card.styles.css";
 import { useDispatch, useSelector } from "react-redux";
 import CountryFlag from "../country-flag/country-flag.component";
 import { useEffect } from "react";
-import {
-  setFirstReviewIndex,
-  setLastReviewIndex,
-  setReviews,
-  setSinglePageReviews,
-} from "../../store/reviews/reviews.action";
+import { setReviews } from "../../store/reviews/reviews.action";
 
-import data from "../../data/reviewsData.json";
+import dummyReviews from "../../data/reviewsData.json";
 
 const ReviewsCards = () => {
   const dispatch = useDispatch();
   const { reviewsData } = useSelector((state) => state);
   const {
-    reviews,
     singlePageReviews,
     searchKeyword,
     sorting,
@@ -32,80 +26,69 @@ const ReviewsCards = () => {
     indexOfLastReview,
     ratingFilter,
     versionFilter,
+    countryFilter,
   } = reviewsData;
 
-  console.log("🟥", ratingFilter, versionFilter);
-
   useEffect(() => {
-    // Handle searching and filtering
-    if (searchKeyword) {
-      const filteredBySearch = data.filter((review) =>
-        review.reviewText.toLowerCase().includes(searchKeyword.toLowerCase())
-      );
-      // If there's a result pdate the global reviews
-      // dispatch(setReviews(filteredBySearch));
-      // Handle sorting
-      handleSortChange(filteredBySearch);
-    } else if (searchKeyword.length === 0) {
-      // dispatch(setReviews(data));
-      // Handle sorting
-      handleSortChange(data);
-    }
-
-    // Rating Filter
-    // console.log(reviews);
-    if (reviews && ratingFilter) {
-      handleRatingFilterChange(reviews);
-    }
-    if (reviews && versionFilter) {
-      handleVersionFilterChange(reviews);
-    }
+    // Handle [search - filtering - sorting] data
+    handleData(dummyReviews);
   }, [
     ratingFilter,
     versionFilter,
+    countryFilter,
     searchKeyword,
     sorting,
     indexOfFirstReview,
     indexOfLastReview,
   ]);
 
-  // Sort change handler
-  const handleSortChange = (data) => {
-    let sortedData = [...data];
+  // Handle data search and filtering
+  const handleData = (data) => {
+    let searchedSortedData = [...data];
 
+    if (searchKeyword) {
+      searchedSortedData = data.filter((review) =>
+        review.reviewText.toLowerCase().includes(searchKeyword.toLowerCase())
+      );
+    }
+
+    // Sort change handler
     if (sorting === "Newest first") {
-      sortedData.sort(
+      searchedSortedData.sort(
         (a, b) => new Date(b.reviewDate) - new Date(a.reviewDate)
       );
     } else if (sorting === "Oldest first") {
-      sortedData.sort(
+      searchedSortedData.sort(
         (a, b) => new Date(a.reviewDate) - new Date(b.reviewDate)
       );
     }
 
-    dispatch(setReviews(sortedData));
-  };
+    // Filter by rating handler
+    let filteredByRating = searchedSortedData;
+    if (ratingFilter) {
+      filteredByRating = searchedSortedData.filter(
+        (review) => parseInt(review.rating) === ratingFilter
+      );
+    }
 
-  // Filter by rating handler
-  const handleRatingFilterChange = (data) => {
-    if (!ratingFilter || data.length === 0) return;
-    let filteredData;
-    console.log(data);
-    filteredData = data.filter(
-      (review) => parseInt(review.rating) === ratingFilter
-    );
+    // Filter by version handler
+    let filteredByVersion = filteredByRating;
+    if (versionFilter) {
+      filteredByVersion = filteredByRating.filter(
+        (review) => review.version === versionFilter
+      );
+    }
 
-    if (filteredData.length !== 0) dispatch(setReviews(filteredData));
-  };
+    let filteredByCountry = filteredByVersion;
+    if (countryFilter) {
+      filteredByCountry = filteredByVersion.filter(
+        (review) => review.countryName === countryFilter
+      );
+    }
 
-  // Filter by version handler
-  const handleVersionFilterChange = (data) => {
-    if (!versionFilter || data.length === 0) return;
-    let filteredData;
-    console.log(data);
-    filteredData = data.filter((review) => review.version === versionFilter);
+    let finalData = filteredByCountry;
 
-    if (filteredData.length !== 0) dispatch(setReviews(filteredData));
+    if (finalData.length !== 0) dispatch(setReviews(finalData));
   };
 
   return (
@@ -130,19 +113,6 @@ const ReviewsCards = () => {
           countryCode = "GB";
           countryName = "United Kingdom";
         }
-
-        const country = [
-          <>
-            <div className="flex gap-2 items-center">
-              <img
-                // src={`https://cdn.countryflags.com/thumbs/${getCountrySlug(
-                src={`https://flagsapi.com/${countryCode}/flat/24.png}=/flag-400.png`}
-                alt={` ${countryCode} Flag`}
-              />
-              <div className="font-bold text-sm">{countryName}</div>
-            </div>
-          </>,
-        ];
 
         return (
           <div
