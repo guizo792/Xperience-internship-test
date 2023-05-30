@@ -48,7 +48,12 @@ const ReviewsCards = () => {
 
   // Handle data search and filtering
   const handleData = (data) => {
-    let searchedSortedData = [...data];
+    // Filter by app handler
+    let filteredByApp = [...data];
+    if (appFilter) {
+      filteredByApp = data.filter((review) => review.appID === appFilter);
+    }
+    let searchedSortedData = [...filteredByApp];
 
     // Search handler
     if (searchKeyword) {
@@ -95,16 +100,8 @@ const ReviewsCards = () => {
       );
     }
 
-    // Filter by app handler
-    let filteredByApp = filteredByCountry;
-    if (appFilter) {
-      filteredByApp = filteredByCountry.filter(
-        (review) => review.appID === appFilter
-      );
-    }
-
     // Final data after processing
-    let finalData = filteredByApp;
+    let finalData = filteredByCountry;
 
     if (finalData.length !== 0) dispatch(setReviews(finalData));
   };

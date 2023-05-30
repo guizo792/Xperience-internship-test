@@ -14,31 +14,8 @@ const INITIAL_STATE = {
   color: "violet",
   value: "",
 };
-
-// const dummyDropDownList = [
-//   {
-//     name: "My app 2",
-//     color: "orange",
-//     value: "the value1",
-//   },
-//   {
-//     name: "My app 5",
-//     color: "pink",
-//     value: "the value1",
-//   },
-//   {
-//     name: "My app 2",
-//     color: "yellow",
-//     value: "the value5",
-//   },
-//   {
-//     name: "My app 4",
-//     color: "green",
-//     value: "the value1",
-//   },
-// ];
-
 const colors = ["violet", "orange", "gray", "pink", "green", "blue", "yellow"];
+
 const CustomSelect = () => {
   const { reviews } = useSelector((state) => state.reviewsData);
   const [showDropdown, setShowDropdown] = useState(false);
@@ -92,7 +69,7 @@ const CustomSelect = () => {
     });
 
     // Update the global state to trigger filtering process by selected app
-    dispatch(setAppFilter("com." + item.name));
+    dispatch(setAppFilter(item.value));
   };
 
   return (

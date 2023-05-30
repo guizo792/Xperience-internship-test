@@ -6,9 +6,9 @@ import Button from "../button/button.component";
 import { useSelector } from "react-redux";
 
 const RightSideHeader = () => {
-  const { reviewsData } = useSelector((state) => state);
-
-  const { reviews, indexOfFirstReview, indexOfLastReview } = reviewsData;
+  const { reviews, indexOfFirstReview, indexOfLastReview } = useSelector(
+    (state) => state.reviewsData
+  );
 
   return (
     <div className="flex items-center justify-between gap-12">
