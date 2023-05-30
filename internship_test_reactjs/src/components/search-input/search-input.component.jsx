@@ -25,6 +25,8 @@ const SearchInput = () => {
       dispatch(setRatingFilter(null));
       dispatch(setVersionFilter(""));
       dispatch(setCountryFilter(""));
+      dispatch(setFirstReviewIndex(1));
+      dispatch(setLastReviewIndex(10));
     }
   };
 

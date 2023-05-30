@@ -1,18 +1,15 @@
-import { AiOutlineCaretDown, AiFillStar } from "react-icons/ai";
+import { AiOutlineCaretDown } from "react-icons/ai";
 
 import countItemsByVersion from "../../utils/countItemsByVersion";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  setRatingFilter,
-  setVersionFilter,
-} from "../../store/reviews/reviews.action";
+import { setVersionFilter } from "../../store/reviews/reviews.action";
 import data from "../../data/reviewsData.json";
+import { GrPowerReset } from "react-icons/gr";
 
 const FilterByVersion = () => {
   const { reviews } = useSelector((state) => state.reviewsData);
   const [open, setOpen] = useState(false);
-  const [versionFilterValue, setVersionFilterValue] = useState("");
   const dispatch = useDispatch();
 
   // Set filter to default value at first time rendering
@@ -41,7 +38,7 @@ const FilterByVersion = () => {
 
   return (
     <div className="flex flex-col gap-2">
-      <div className="flex gap-2">
+      <div className="flex gap-2 items-center">
         <button
           onClick={(e) => {
             e.preventDefault();
@@ -52,6 +49,17 @@ const FilterByVersion = () => {
           <AiOutlineCaretDown />
         </button>
         <span className="font-bold text-sm">Filter By Version</span>
+        {open && (
+          <button
+            className="bg-gray-200 border border-gray-300 rounded flex gap-2 justify-center items-center hover:bg-gray-100 p-1 ml-auto"
+            onClick={(e) => {
+              e.preventDefault();
+              dispatch(setVersionFilter(""));
+            }}
+          >
+            <GrPowerReset size={12} />
+          </button>
+        )}
       </div>
       {open && (
         <div className="flex flex-col gap-[3px]">

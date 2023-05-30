@@ -50,6 +50,9 @@ const ReviewsCards = () => {
       searchedSortedData = data.filter((review) =>
         review.reviewText.toLowerCase().includes(searchKeyword.toLowerCase())
       );
+
+      if (searchedSortedData.length === 0)
+        window.alert("No results found for this keyword :(");
     }
 
     // Sort change handler

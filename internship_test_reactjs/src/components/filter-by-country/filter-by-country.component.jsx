@@ -11,6 +11,7 @@ import {
 import CountryFlag from "../country-flag/country-flag.component";
 import { useDispatch, useSelector } from "react-redux";
 import { setCountryFilter } from "../../store/reviews/reviews.action";
+import { GrPowerReset } from "react-icons/gr";
 
 const FilterByCountry = () => {
   const { reviews } = useSelector((state) => state.reviewsData);
@@ -37,7 +38,7 @@ const FilterByCountry = () => {
 
   return (
     <div className="flex flex-col gap-2">
-      <div className="flex gap-2">
+      <div className="flex gap-2 items-center">
         <button
           onClick={(e) => {
             e.preventDefault();
@@ -48,6 +49,17 @@ const FilterByCountry = () => {
           <AiOutlineCaretDown />
         </button>
         <span className="font-bold text-sm">Filter By Country</span>
+        {open && (
+          <button
+            className="bg-gray-200 border border-gray-300 rounded flex gap-2 justify-center items-center hover:bg-gray-100 p-1 ml-auto"
+            onClick={(e) => {
+              e.preventDefault();
+              dispatch(setCountryFilter(""));
+            }}
+          >
+            <GrPowerReset size={12} />
+          </button>
+        )}
       </div>
       {open && (
         <div className="flex flex-col gap-[3px]">
