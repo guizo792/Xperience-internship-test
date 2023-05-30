@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   setFirstReviewIndex,
   setLastReviewIndex,
-  setReviews,
   setSinglePageReviews,
 } from "../../store/reviews/reviews.action";
 
@@ -68,7 +67,9 @@ const Pagination = () => {
           <button
             key={number}
             onClick={(e) => handlePageChange(e, number)}
-            className="bg-gray-300 border-[1px] hover:bg-gray-100 border-gray-400 p-1 rounded w-7 h-7 min-w-7 min-h-7 flex items-center justify-center"
+            className={`bg-gray-300 border-[1px] hover:bg-gray-100 border-gray-400 p-1 rounded w-7 h-7 min-w-7 min-h-7 flex items-center justify-center ${
+              number === currentPage ? "bg-green-300" : ""
+            }`}
           >
             {number}
           </button>

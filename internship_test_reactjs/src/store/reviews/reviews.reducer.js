@@ -8,6 +8,7 @@ const INITIAL_STATE = {
   ratingFilter: null,
   versionFilter: "",
   countryFilter: "",
+  appFilter: "",
 };
 
 export const reviewsReducer = (state = INITIAL_STATE, action) => {
@@ -56,6 +57,11 @@ export const reviewsReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         countryFilter: action.payload,
+      };
+    case "SET_APP_FILTER":
+      return {
+        ...state,
+        appFilter: action.payload,
       };
     default:
       return state;

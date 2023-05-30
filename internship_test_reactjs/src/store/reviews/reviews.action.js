@@ -59,3 +59,10 @@ export const setLastReviewIndex = (data) => {
     payload: data,
   };
 };
+
+export const setAppFilter = (data) => {
+  return {
+    type: "SET_APP_FILTER",
+    payload: data,
+  };
+};

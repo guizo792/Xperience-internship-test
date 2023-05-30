@@ -13,8 +13,11 @@ const RightSideHeader = () => {
   return (
     <div className="flex items-center justify-between gap-12">
       <span className="text-sm font-bold">
-        Viewing {indexOfFirstReview}-{indexOfLastReview} of {reviews.length}{" "}
-        Reviews
+        Viewing{" "}
+        {reviews.length > 10
+          ? indexOfFirstReview + "-" + indexOfLastReview
+          : reviews.length}{" "}
+        of {reviews.length} Reviews
       </span>
       <span className="flex gap-2">
         <Button>

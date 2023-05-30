@@ -27,7 +27,10 @@ const ReviewsCards = () => {
     ratingFilter,
     versionFilter,
     countryFilter,
+    appFilter,
   } = reviewsData;
+
+  console.log(appFilter);
 
   useEffect(() => {
     // Handle [search - filtering - sorting] data
@@ -36,6 +39,7 @@ const ReviewsCards = () => {
     ratingFilter,
     versionFilter,
     countryFilter,
+    appFilter,
     searchKeyword,
     sorting,
     indexOfFirstReview,
@@ -46,6 +50,7 @@ const ReviewsCards = () => {
   const handleData = (data) => {
     let searchedSortedData = [...data];
 
+    // Search handler
     if (searchKeyword) {
       searchedSortedData = data.filter((review) =>
         review.reviewText.toLowerCase().includes(searchKeyword.toLowerCase())
@@ -82,6 +87,7 @@ const ReviewsCards = () => {
       );
     }
 
+    // Filter by country handler
     let filteredByCountry = filteredByVersion;
     if (countryFilter) {
       filteredByCountry = filteredByVersion.filter(
@@ -89,7 +95,16 @@ const ReviewsCards = () => {
       );
     }
 
-    let finalData = filteredByCountry;
+    // Filter by app handler
+    let filteredByApp = filteredByCountry;
+    if (appFilter) {
+      filteredByApp = filteredByCountry.filter(
+        (review) => review.appID === appFilter
+      );
+    }
+
+    // Final data after processing
+    let finalData = filteredByApp;
 
     if (finalData.length !== 0) dispatch(setReviews(finalData));
   };

@@ -5,7 +5,7 @@ const DropDownItem = ({ item, handelChoice }) => {
       onClick={() => handelChoice(item)}
     >
       <span
-        className="rounded w-5 h-5"
+        className="rounded w-5 h-5 border border-gray-200"
         style={{ backgroundColor: item.color }}
       ></span>
       <p className="font-light text-base">{item.name}</p>
